@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: symptosage-deployment
+  labels:
+    app: symptosage
+spec:
+  replicas: 2  # Start with 2 pods (K8s will scale this)
+  selector:
+    matchLabels:
+      app: symptosage
+  template:
+    metadata:
+      labels:
+        app: symptosage
+    spec:
+      containers:
+      - name: symptosage-container
+        image: narzee17/symptosage-app:latest  # Replace with your actual image
+        ports:
+        - containerPort: 5000
+        env:
+        - name: MONGO_URI
+          value: "mongodb+srv://narzee:E2VZaSQ8i3WtfHQM@cluster0.trbt0.mongodb.net/Symptosage?retryWrites=true&w=majority&appName=Cluster0"  # Replace with your actual MongoDB Atlas URI
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "512Mi"
+          limits:
+            cpu: "500m"
+            memory: "1Gi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: symptosage-service
+spec:
+  type: LoadBalancer  # Expose externally
+  selector:
+    app: symptosage
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000

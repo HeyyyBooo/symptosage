@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/icon.ico') }}">
+    <title>Community Forum : SymptoSage</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body {
+           box-sizing: border-box;
+            font-family: 'Gill Sans MT', sans-serif;
+            min-height: 100vh;
+            color: #333;
+            /* background-image: url('static/images/background.jpg'); */
+            backdrop-filter: blur(1px);
+            background-size: cover;
+        }
+         #header {
+            display: flex;
+            align-items:center;
+            padding:2px;
+            text-align:left;
+            background-color: #5438ba;
+            justify-content: left;
+            align-items: right;
+            
+            
+         }
+
+         #header h3 {
+            
+            margin: 0;
+            
+            font-size: 37px;
+            font-weight: 400;
+            color:transparent;
+            -webkit-text-stroke: 1px white;
+            background: url(static/images/header.png);
+            -webkit-background-clip :text ;
+          
+            background-position: 0 0;
+            animation: rep 4s linear infinite;
+        }
+        @keyframes rep{
+            100%{
+                background-position: 200px 0;
+            }
+        }
+        #header h7 {
+            
+            margin: 0;
+            color: #fff;
+            font-size: 12px;
+
+        }
+        .post{
+            padding: 20px;
+            background:transparent;
+            backdrop-filter: blur(1px);
+            border-radius: 20px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.586);
+        } .reply { border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; }
+        .reply { margin-left: 20px; background: #f9f9f9; }
+        .login {
+            max-width: 400px;
+            margin: 100px auto;
+            margin-left: 60%;
+            height:650px;
+            padding: 20px;
+            background:transparent;
+            backdrop-filter: blur(2px);
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.586);
+            text-align: center;
+            
+        }
+       
+        form {
+            margin-top: 50px;
+        }
+
+        label {
+            font-size: 36px;
+            color:WHITE;
+            text-shadow: 2px 2px 3px  #000000;
+            
+        }
+
+        input {
+            width: 15%;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.386);
+            height:20px;
+           
+        }
+        textarea {
+            width: 25%;
+            padding: 15px;
+            height: 35%;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.386);
+           
+        }
+        button {
+            margin-top: 20px;
+            font-size: 14px;
+            background-color:#ffaa3f ;
+            color: #fff;
+            padding: 13px 50px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition:background-color 0.3s,transform 0.3s,box-shadow 0.3s;
+        }
+
+        button:hover {
+            background-color:#5438ba;
+            transition-timing-function:ease-in-out; 
+            transform: scale(1.03,1.03);
+            box-shadow: 0 0 5px rgb(86, 38, 38);
+        } 
+
+         #footer {
+            background-color: #ffa93fb4; 
+            padding: 5px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        #footer p {
+            margin: 0;
+            color: #fff;
+            text-align: center;
+            font-size: 12px;
+        } 
+
+        .nav {
+            background-color: #5438ba;  /* Blue background */
+            padding: 15px;
+            text-align: right;
+            /*box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); */
+        }
+
+    .nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 10px 15px;
+        transition: background-color 0.3s, color 0.3s;
+        
+    }
+
+    .nav a:hover {
+        background-color: white;
+        color: #5438ba;
+    }
+
+    .nav a:not(:last-child) {
+        margin-right: 15px;
+    }
+    .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.586);
+}
+
+.table thead {
+    background-color: #df4155;
+    color: white;
+    font-weight: bold;
+}
+
+.table th, .table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.table tbody tr:hover {
+    background-color: #f2f2f2;
+    transition: 0.3s;
+}
+
+.table th {
+    text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+    .table {
+        font-size: 14px;
+    }
+    .table th, .table td {
+        padding: 8px;
+    }
+}
+
+        
+    </style>
+</head>
+<body>
+
+    
+    {% if session.username %}
+    <div class="container">
+        <div id="header">
+            <div>
+                <h3>Welcome, {{ session['username'].upper() }} - Community Forum</h3>
+            </div>
+
+        <div class="nav">
+    
+    <a href="{{ url_for('index') }}"><i class="fas fa-home"></i> Home</a> | 
+    <a href="{{ url_for('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a> | 
+    <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+</div>
+    </div>
+    
+        <form method="POST" action="/forum">
+            <input type="text" name="title" placeholder="Post Title" required><br>
+            <br>
+            <textarea name="content" placeholder="Write your post..." required></textarea><br>
+            <button type="submit">Post</button>
+        </form>
+    {% else %}
+        <p><a href="/login">Login</a> to participate in the forum.</p>
+    {% endif %}
+    <br>
+    <h2>POSTS</h2>
+    <br>
+    {% for post in posts %}
+        <div class="post">
+            <strong>{{ post.username }}</strong> - <small>{{ post.timestamp|humanize_time }}</small>
+            <p>{{ post.title }}</p>
+            <p>{{ post.content }}</p>
+            
+            <form method="POST" action="/reply/{{ post._id }}">
+                <textarea name="reply_content" placeholder="Write a reply..." required></textarea>
+                <button type="submit">Reply</button>
+            </form>
+            
+            {% for reply in post.replies %}
+                <div class="reply">
+                    <strong>{{ reply.username }}</strong> - <small>{{ reply.timestamp|humanize_time }}</small>
+                    <p>{{ reply.content }}</p>
+                </div>
+            {% endfor %}
+        </div>
+        <br>
+    {% endfor %}
+</body>
+</html>

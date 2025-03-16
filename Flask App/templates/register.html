@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register : SymptoSage</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/icon.ico') }}">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body {
+           box-sizing: border-box;
+            font-family: 'Gill Sans MT', sans-serif;
+            min-height: 100vh;
+            color: #333;
+            background-image: url('static/images/background.jpg');
+            background-size: cover;
+        }
+         #header {
+            display: flex;
+            align-items:center;
+            padding:2px;
+            text-align:left;
+            background-color: #5438ba;
+            justify-content: left;
+            align-items: right;
+            
+            
+         }
+
+         #header h3 {
+            
+            margin: 0;
+            
+            font-size: 45px;
+            font-weight: 400;
+            color:transparent;
+            -webkit-text-stroke: 1px white;
+            background: url(static/images/header.png);
+            -webkit-background-clip :text ;
+          
+            background-position: 0 0;
+            animation: rep 4s linear infinite;
+        }
+        @keyframes rep{
+            100%{
+                background-position: 200px 0;
+            }
+        }
+        #header h7 {
+            
+            margin: 0;
+            color: #fff;
+            font-size: 12px;
+
+        }
+
+        .login {
+            max-width: 400px;
+            margin: 100px auto;
+            margin-left: 60%;
+            height:650px;
+            padding: 20px;
+            background:transparent;
+            backdrop-filter: blur(2px);
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.586);
+            text-align: center;
+            
+        }
+       
+        form {
+            margin-top: 50px;
+        }
+
+        label {
+            font-size: 36px;
+            color:WHITE;
+            text-shadow: 2px 2px 3px  #000000;
+            
+        }
+
+        input {
+            width: calc(100% - 20px);
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.386);
+            height:20px;
+            margin-top: 30px;
+            width:90%;
+            
+            display:block;
+            /* white-space: pre-wrap;  */
+            resize: vertical;
+        }
+        
+        button {
+            margin-top: 20px;
+            font-size: 14px;
+            background-color:#ffaa3f ;
+            color: #fff;
+            padding: 13px 50px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition:background-color 0.3s,transform 0.3s,box-shadow 0.3s;
+        }
+
+        button:hover {
+            background-color:#5438ba;
+            transition-timing-function:ease-in-out; 
+            transform: scale(1.03,1.03);
+            box-shadow: 0 0 5px rgb(86, 38, 38);
+        } 
+
+         #footer {
+            background-color: #ffa93fb4; 
+            padding: 5px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        #footer p {
+            margin: 0;
+            color: #fff;
+            text-align: center;
+            font-size: 12px;
+        } 
+
+        .nav {
+            background-color: #5438ba;  /* Blue background */
+            padding: 15px;
+            text-align: right;
+            /*box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); */
+        }
+
+    .nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 10px 15px;
+        transition: background-color 0.3s, color 0.3s;
+        
+    }
+
+    .nav a:hover {
+        background-color: white;
+        color: #5438ba;
+    }
+
+    .nav a:not(:last-child) {
+        margin-right: 15px;
+    }
+    </style>
+</head>
+<body>
+    <script>
+        window.onload = function() {
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        alert("{{ message }}");
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        };
+    </script>
+    <div class="container">
+        <div id="header">
+            <div>
+                <h3>SymptoSage</h3>
+                <h7>AI/ML Wellness Classifier</h7>
+            </div>
+                
+        <div class="nav">
+                <a href="{{ url_for('index') }}"><i class="fas fa-home"></i>Home</a> | 
+                <a href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i>Login</a>
+        </div>
+            
+        </div>
+    
+    <div class="login">
+    <form method="POST">
+        <label for="userInput">REGISTER</label>
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="date" name="dob" placeholder="Date of Birth" required>
+        <input type="email" name="mail" placeholder="Mail" required>
+        <input type="number" name="phoneno" placeholder="Phone number" required> 
+        <button type="submit">Register</button>
+    </form>
+    <a href="{{ url_for('login') }}">Already have an account? Login</a>
+    </div>
+    <div id="footer">
+        <p>Machine Learning Project by Nishant Narjinary</p>
+        <p>Use Of Natural Language Processing & Naive Bayes Classification On Survey Data</p>
+    </div>
+</body>
+</html>
