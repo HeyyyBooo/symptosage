@@ -46,7 +46,9 @@ SymptoSage is a **Flask-based web application** that uses **Machine Learning** t
 ---
 ## Screenshots
 ![Screenshot 2025-03-17 003732](https://github.com/user-attachments/assets/412079cd-18ba-4d5f-9793-e80b9a5813ff) 
+
 ![Screenshot 2025-03-17 003710](https://github.com/user-attachments/assets/4cb09994-312c-4d60-b85b-f16dd685f662)
+
 ![Screenshot 2025-03-17 003651](https://github.com/user-attachments/assets/9f15de6f-e38e-4088-9c28-e8b24e75eeb8)
 
 ---
