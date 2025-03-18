@@ -70,7 +70,7 @@ pip install -r requirements.txt
 ### 3️⃣ **Run the FastAPI Backend**
 ```sh
 cd Backend FastAPI
-uvicorn main:app --host 0.0.0.0 --port 5002
+uvicorn app:app --host 0.0.0.0 --port 5002
 cd ..
 ```
 
@@ -83,6 +83,7 @@ cd ..
 
 ---
 
+"Dont Forget to update new api link in app.py of flask App"
 ## 🐳 Deploying with Docker
 
 ```sh
