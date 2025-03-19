@@ -15,7 +15,7 @@ mongo = PyMongo(app)
 bcrypt = Bcrypt(app)
 
 posts_collection =mongo.db["forum_posts"]
-FASTAPI_URL = "http://192.168.0.104:5002/predict"
+FASTAPI_URL = "https://symptoapi.onrender.com/predict"
 disease_data = {
     'ACNE': ["Maintain good skincare habits, use topical treatments, and consider prescription medications.", "Dermatologist"],
     'ARTHRITIS': ["Medications, physical therapy, and lifestyle changes.", "Rheumatologist"],
