@@ -5,6 +5,7 @@ SymptoSage is a **Flask-based web application** that uses **Machine Learning** t
 - **Model** (Machine Learning model for disease prediction)
 - **Backend FastAPI** (Handles API requests for predictions)
 - **Flask App** (User interface for symptom input and additional features)
+- **Kubernetes** (For managing the conatiners in one clusture)
 
 ---
 
@@ -15,6 +16,8 @@ SymptoSage is a **Flask-based web application** that uses **Machine Learning** t
 ├── 📂 Model                # Machine learning model (Pickle file, scripts)
 ├── 📂 Backend FastAPI      # FastAPI-based backend for model inference
 ├── 📂 Flask App            # Flask web application with MongoDB integration
+├── 📂 Kubernetes           # For managing the Docker containers in one clusture
+
 ```
 
 ---
@@ -40,8 +43,7 @@ SymptoSage is a **Flask-based web application** that uses **Machine Learning** t
 - **MongoDB Atlas** stores user profiles, past predictions, and forum posts for better user connectivity.
 
 ### ✅ **Scalability with Kubernetes**
-- **Horizontal Pod Autoscaler (HPA)** for dynamic scaling
-- **Load-balanced FastAPI backend** for better performance
+- **Load-balanced one Clusture** for better performance
 
 ---
 ## Screenshots
@@ -99,11 +101,14 @@ docker run -p 5000:5000 symptosage
 ---
 
 ## ☁️ Deploying with Kubernetes
+(minikube)
 
 ```sh
-cd Flask App
-kubectl apply -f deployment.yaml
-kubectl apply -f hpa.yaml
+cd kubernetes
+kubectl apply -f fastapi-deployment.yaml
+kubectl apply -f fastapi-service.yaml
+kubectl apply -f flask-deployment.yaml
+kubectl apply -f flask-service.yaml
 ```
 
 Check running pods:
